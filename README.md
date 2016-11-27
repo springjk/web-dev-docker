@@ -1,6 +1,45 @@
 # 前端开发环境 Docker 镜像
+基于 Alpine 版 linux，构建于 `Nodejs` LTS，包含  `yarn` `webpack` `zsh` `git` 等常用工具，开箱即用。
 
-## 前端开发工具
+## 安装
+初次安装请根据以下步骤执行，熟悉 Docker 的用户可修改 Dockerfile 自行编译使用。
+
+**Setp1: 下载镜像**
+
+`docker pull springjk/webdev`
+
+
+**Setp2: 创建容器**
+
+```bash
+docker run -idt --name webdev springjk/webdev \
+  -p <work-port>:8080 \
+  -v <workspace-path>:/workspace \
+  --restart=always
+```
+
+> 请将 `<work-port>` 与 `<workspace-path>` 替换，restart=always 会使容器跟随 Dokcer 自动启动。
+
+* `work-port` - 浏览器访问端口，容器 8080 端口映射本机端口
+* `workspace-path` - 代码同步工作目录，Windows 版请确认该目录所在盘符已在 Docker 的配置中挂载
+
+示例：
+
+```bash
+docker run -idt --name webdev springjk/webdev \
+  -p 80:8080 \
+  -v d:/git_workspace:/workspace:/workspace \
+  --restart=always
+```
+
+## 使用
+
+```
+docker exec -it webdev zsh
+```
+
+
+## 镜像内容
 
 ### 基础环境
 
@@ -66,10 +105,3 @@
 | [git](https://git-scm.com) | 免费、开源的分布式版本控制工具 | latest |
 | [zsh](http://www.zsh.org) | 强大的 Shell 增强工具 | latest |
 | [oh-my-zsh](http://ohmyz.sh) | zsh 的扩展工具 | latest |
-
-
-```shell
-docker run -idt -v <workspace-path>:/workspace --name frontend zsh
-docker exec -it frontend zsh
-```
-
