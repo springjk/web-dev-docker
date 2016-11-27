@@ -34,7 +34,7 @@ RUN npm install -g \
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 # 本地化
-RUN
+RUN \
   # npm 淘宝镜像
   npm config set registry 'https://registry.npm.taobao.org' \
   # 包管理器中科大镜像
