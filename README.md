@@ -6,16 +6,14 @@
 
 **Setp1: 下载镜像**
 
-`docker pull springjk/webdev`
-
+```bash
+docker pull springjk/webdev
+```
 
 **Setp2: 创建容器**
 
 ```bash
-docker run -idt --name webdev springjk/webdev \
-  -p <work-port>:8080 \
-  -v <workspace-path>:/workspace \
-  --restart=always
+docker run -idt -p <work-port>:8080 -v <workspace-path>:/workspace --restart=always --name webdev springjk/webdev
 ```
 
 > 请将 `<work-port>` 与 `<workspace-path>` 替换，restart=always 会使容器跟随 Dokcer 自动启动。
@@ -26,15 +24,12 @@ docker run -idt --name webdev springjk/webdev \
 示例：
 
 ```bash
-docker run -idt --name webdev springjk/webdev \
-  -p 80:8080 \
-  -v d:/git_workspace:/workspace:/workspace \
-  --restart=always
+docker run -idt -p 80:8080 -v d:/git_workspace:/workspace --restart=always --name webdev springjk/webdev
 ```
 
 ## 使用
 
-```
+```bash
 docker exec -it webdev zsh
 ```
 
