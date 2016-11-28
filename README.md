@@ -13,7 +13,7 @@ docker pull springjk/webdev
 **Setp2: 创建容器**
 
 ```bash
-docker run -idt -p <work-port>:8080 -v <workspace-path>:/workspace --restart=always --name webdev springjk/webdev
+docker run -itd -p <work-port>:8080 -v <workspace-path>:/workspace --name webdev --restart always springjk/webdev
 ```
 
 > 请将 `<work-port>` 与 `<workspace-path>` 替换，restart=always 会使容器跟随 Dokcer 自动启动。
@@ -24,7 +24,7 @@ docker run -idt -p <work-port>:8080 -v <workspace-path>:/workspace --restart=alw
 示例：
 
 ```bash
-docker run -idt -p 80:8080 -v d:/git_workspace:/workspace --restart=always --name webdev springjk/webdev
+docker run -itd -p 80:8080 -v d:/git_workspace:/workspace --name webdev --restart=always springjk/webdev
 ```
 
 ## 使用
@@ -33,6 +33,11 @@ docker run -idt -p 80:8080 -v d:/git_workspace:/workspace --restart=always --nam
 docker exec -it webdev zsh
 ```
 
+## 删除
+
+```bash
+docker rm -f webdev
+```
 
 ## 镜像内容
 
@@ -41,7 +46,7 @@ docker exec -it webdev zsh
 | 名称 | 说明 | 版本 |
 | --- | --- | --- |
 | [node](http://www.npmjs.com) | Node.js 基础环境 | 6.9.1 (LTS) |
-| [python](https://www.python.org) | Python 基础环境，编译 sass 必要环境 | V2.X |
+| [python](https://www.python.org) | Python 基础环境，编译 node-sass 必要环境 | V2.X |
 
 ### 模块管理器
 
@@ -100,3 +105,9 @@ docker exec -it webdev zsh
 | [git](https://git-scm.com) | 免费、开源的分布式版本控制工具 | latest |
 | [zsh](http://www.zsh.org) | 强大的 Shell 增强工具 | latest |
 | [oh-my-zsh](http://ohmyz.sh) | zsh 的扩展工具 | latest |
+
+### 本地化
+
+* 时区修改为 `PRC`
+* npm 源修改为淘宝源
+* APK 包管理器源修改为中科大源

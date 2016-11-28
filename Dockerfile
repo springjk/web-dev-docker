@@ -34,19 +34,19 @@ RUN npm install -g \
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 # 本地化
-RUN \
+RUN true \
   # npm 淘宝镜像
-  npm config set registry 'https://registry.npm.taobao.org' & \
+  && npm config set registry 'https://registry.npm.taobao.org' \
   # 包管理器中科大镜像
-  rm /etc/apk/repositories & \
-  echo "http://mirrors.ustc.edu.cn/alpine/v3.4/main/" > /etc/apk/repositories & \
-  echo "http://mirrors.ustc.edu.cn/alpine/v3.4/community/" >> /etc/apk/repositories & \
+  && rm /etc/apk/repositories \
+  && echo "http://mirrors.ustc.edu.cn/alpine/v3.4/main/" > /etc/apk/repositories \
+  && echo "http://mirrors.ustc.edu.cn/alpine/v3.4/community/" >> /etc/apk/repositories \
   # 修改时区
-  ln -sf /usr/share/zoneinfo/PRC /etc/localtime & \
+  && ln -sf /usr/share/zoneinfo/PRC /etc/localtime \
   # just for fun
-  echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh
+  && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh
 
-EXPOSE 8080
+EXPOSE 80 8080
 
 RUN mkdir /workspace
 
