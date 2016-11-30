@@ -4,6 +4,10 @@
 ## 安装
 初次安装请根据以下步骤执行，熟悉 Docker 的用户可修改 Dockerfile 自行编译使用。
 
+**Setp0: 安装 Docker**
+
+* [Docker 官方地址](https://www.docker.com/products/overview) - 如需中文帮助请查看 [Docker安装教程](http://80to.me/2016/11/30/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/)
+
 **Setp1: 下载镜像**
 
 ```bash
