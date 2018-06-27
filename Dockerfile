@@ -34,13 +34,9 @@ RUN true \
   && npm config set chromedriver_cdnurl https://npm.taobao.org/mirrors/chromedriver \
   && npm config set operadriver_cdnurl https://npm.taobao.org/mirrors/operadriver \
   && npm config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs \
-  && npm config set selenium_cdnurl https://npm.taobao.org/mirrors/selenium
-
-RUN yarn config set registry https://registry.npm.taobao.org
-
-RUN true \
-  # # yarn china mirrors
-  # && yarn config set registry https://registry.npm.taobao.org \
+  && npm config set selenium_cdnurl https://npm.taobao.org/mirrors/selenium \
+  # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
+  && yarn config set registry https://registry.npm.taobao.org || true \
   # just for fun
   && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
   # loads nvm
