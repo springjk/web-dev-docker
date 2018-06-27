@@ -34,9 +34,7 @@ RUN true \
   && npm config set chromedriver_cdnurl https://npm.taobao.org/mirrors/chromedriver \
   && npm config set operadriver_cdnurl https://npm.taobao.org/mirrors/operadriver \
   && npm config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs \
-  && npm config set selenium_cdnurl https://npm.taobao.org/mirrors/selenium
-  
-RUN true \
+  && npm config set selenium_cdnurl https://npm.taobao.org/mirrors/selenium \
   # yarn china mirrors
   && yarn config set registry https://registry.npm.taobao.org \
   # just for fun
