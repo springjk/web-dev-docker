@@ -1,5 +1,4 @@
-ARG BUILD_FROM=node:8.11.3-stretch
-FROM $BUILD_FROM
+FROM node:8.11.3-slim
 
 # system local config
 RUN true \
@@ -17,7 +16,6 @@ RUN apt-get update \
   zsh curl wget vim git
 
 RUN npm install -g \
-  yarn \
   anywhere
 
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
