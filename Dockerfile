@@ -1,13 +1,19 @@
-FROM node:6.11.4-slim
+ARG BUILD_FROM=node:8.11.3-stretch
+FROM $BUILD_FROM
 
 RUN apt-get update \
-  && apt-get install -y git zsh vim
+  && apt-get install -y \
+  # node-sass 等编译依赖
+  make gcc g++ python \
+  # 命令行工具
+  zsh curl wget vim git
 
 RUN npm install -g \
-  cnpm \
+  cnpm --registry=https://registry.npm.taobao.org \
+  yarn \
   anywhere
 
-RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
+RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 # china mirrors
