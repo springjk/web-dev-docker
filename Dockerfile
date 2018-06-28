@@ -33,6 +33,8 @@ RUN true \
   && npm config set operadriver_cdnurl https://npm.taobao.org/mirrors/operadriver \
   && npm config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs \
   && npm config set selenium_cdnurl https://npm.taobao.org/mirrors/selenium \
+  # fix yarn permission denied  https://github.com/nodejs/docker-node/issues/661
+  && chmod a+x /usr/local/bin/yarn
   # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
   && yarn config set registry https://registry.npm.taobao.org || true \
   # just for fun
