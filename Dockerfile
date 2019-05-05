@@ -1,4 +1,4 @@
-FROM node:8.11.3-slim
+FROM node:10.15-slim
 
 # system local config
 RUN true \
@@ -6,7 +6,7 @@ RUN true \
   && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
   && sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
   # timezone to china
-  && ln -sf /usr/share/zoneinfo/PRC /etc/localtime 
+  && ln -sf /usr/share/zoneinfo/PRC /etc/localtime
 
 RUN apt-get update \
   && apt-get install -y \
@@ -18,7 +18,7 @@ RUN apt-get update \
 RUN npm install -g \
   anywhere
 
-RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 
