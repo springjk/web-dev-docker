@@ -1,6 +1,22 @@
 # 前端开发环境 Docker 镜像
 基于 Alpine 版 linux，构建于 `Nodejs` LTS，包含  `yarn` `webpack` `zsh` `git` 等常用工具，开箱即用。
 
+
+如果不需要作为开发环境而是将其作为命令行工具使用，参考以下用法：
+
+**PS：工具式用法**
+
+```bash
+cd {your-project-path}
+docker run --rm -v $(pwd):/workspace  springjk/webdev {your-command}
+```
+
+示例：
+
+```bash
+docker run --rm -v $(pwd):/workspace  springjk/webdev npm install && npm run build
+```
+
 ## 安装
 初次安装请根据以下步骤执行，熟悉 Docker 的用户可修改 Dockerfile 自行编译使用。
 
@@ -29,6 +45,8 @@ docker run -itd -p <work-port>:8080 -v <workspace-path>:/workspace --name webdev
 
 ```bash
 docker run -itd -p 80:8080 -v d:/git_workspace:/workspace --name webdev --restart=always springjk/webdev
+docker run -itd -v /app:/workspace --name webdev --restart=always springjk/webdev
+
 ```
 
 ## 使用
