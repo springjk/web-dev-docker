@@ -22,7 +22,7 @@ docker run --rm -v $(pwd):/workspace  springjk/webdev npm install && npm run bui
 
 **Setp0: 安装 Docker**
 
-* [Docker 官方地址](https://www.docker.com/products/overview) - 如需中文帮助请查看 [Docker安装教程](http://80to.me/2016/11/30/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/)
+* [Docker 官方地址](https://www.docker.com/products/overview)
 
 **Setp1: 下载镜像**
 
@@ -67,7 +67,7 @@ docker rm -f webdev
 
 | 名称 | 说明 | 版本 |
 | --- | --- | --- |
-| [node](http://www.npmjs.com) | Node.js 基础环境 | 6.9.1 (LTS) |
+| [node](http://www.npmjs.com) | Node.js 基础环境 | 12 (LTS) |
 | [python](https://www.python.org) | Python 基础环境，编译 node-sass 必要环境 | V2.X |
 
 ### 模块管理器
@@ -76,15 +76,7 @@ docker rm -f webdev
 | --- | --- | --- |
 | [npm](http://www.npmjs.com) | Node.js 官方推出的 JavaScript 包工具 | v3.10.8 |
 | [yarn](https://yarnpkg.com) | Facebook 推出的开源 JavaScript 包工具 | latest |
-| [bower](https://bower.io) | Twitter 推出的 JavaScript 包管理工具 | latest |
-| [cnpm](https://npm.taobao.org) | 淘宝推出的 npm 淘宝源镜像版 | latest |
 
-### 模块加载器
-
-| 名称 | 说明 | 版本 |
-| --- | --- | --- |
-| [webpack](http://webpack.github.io) | 前端资源模块化管理和打包工具 | latest |
-| [browserify](http://browserify.org) | CommonJS 模块浏览器端支持工具 | latest |
 
 ### 构建工具
 
@@ -98,23 +90,13 @@ docker rm -f webdev
 
 | 名称 | 说明 | 版本 |
 | --- | --- | --- |
-| [babel](https://babeljs.io) | ES6 代码编译工具 | latest |
-| [coffee-script](http://coffeescript.org) | JavaScript 预处理语言编译工具 | latest |
-| [less](http://lesscss.org) | CSS 预处理语言编译工具 | latest |
 | [node-sass](https://www.npmjs.com/package/node-sas) | CSS 预处理语言编译工具 | latest |
-
-### 框架工具
-
-| 名称 | 说明 | 版本 |
-| --- | --- | --- |
-| [vue-cli](https://github.com/vuejs/vue-cli) | Vue.js 命令行工具 | latest |
 
 
 ### 开发工具
 
 | 名称 | 说明 | 版本 |
 | --- | --- | --- |
-| [webpack-dev-server](http://webpack.github.io/docs/webpack-dev-server.html) | 小型的 node.jsExpress 服务器 | latest |
 | [anywhere](https://www.npmjs.com/package/anywhere) | 随启随用的静态文件服务器 | latest |
 
 ### 系统工具

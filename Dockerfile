@@ -1,4 +1,4 @@
-FROM node:10.15-slim
+FROM node:12-slim
 
 # system local config
 RUN true \
@@ -18,7 +18,6 @@ RUN apt-get update \
 RUN npm install -g \
   anywhere
 
-RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 
@@ -39,9 +38,6 @@ RUN true \
   && yarn config set registry https://registry.npm.taobao.org || true \
   # just for fun
   && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
-  # loads nvm
-  && echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.oh-my-zsh/custom/custom.zsh \
-  && echo '[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"' >> ~/.oh-my-zsh/custom/custom.zsh
 
 RUN mkdir /workspace
 
