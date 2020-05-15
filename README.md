@@ -8,13 +8,14 @@
 
 ```bash
 cd {your-project-path}
-docker run --rm -v $(pwd):/workspace  springjk/webdev {your-command}
+docker run --rm -v $(pwd):/workspace -e HOST=0.0.0.0 -p 8001:8001 springjk/webdev bash -c "{your-command}"
 ```
 
 示例：
 
 ```bash
-docker run --rm -v $(pwd):/workspace  springjk/webdev npm install && npm run build
+docker run --rm -v $(pwd):/workspace -e HOST=0.0.0.0 -p 8001:8001 springjk/webdev bash -c "npm install && npm run dev"
+docker run --rm -v $(pwd):/workspace -e HOST=0.0.0.0 -p 8001:8001 springjk/webdev bash -c "npm install && npm run build"
 ```
 
 ## 安装
