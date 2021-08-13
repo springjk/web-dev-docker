@@ -1,5 +1,3 @@
-ARG NODE_VERSION
-
 FROM node:${NODE_VERSION}-slim
 
 # system local config
@@ -38,8 +36,7 @@ RUN true \
   && chmod a+x /usr/local/bin/yarn \
   # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
   && yarn config set registry https://registry.npm.taobao.org || true
-  # just for fun
-  # && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
+
 
 RUN mkdir /workspace
 
