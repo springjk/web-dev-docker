@@ -13,7 +13,7 @@ RUN true \
 RUN apt-get update \
   && apt-get install -y \
   # node-sass 等编译依赖
-  make gcc g++ python \
+  apt-utils make gcc g++ python \
   # 命令行工具
   zsh curl wget vim git
 
@@ -39,7 +39,7 @@ RUN true \
   # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
   && yarn config set registry https://registry.npm.taobao.org || true \
   # just for fun
-  # && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
+  && touch ~/.oh-my-zsh/custom/custom.zsh && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
 
 
 RUN mkdir /workspace
