@@ -1,0 +1,20 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-php:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: ["10", "11", "12", "13", "14", "15", "16"]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      env:
+        NODE_VERSION: ${{ matrix.node_version }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        ALIYUN_DOCKER_USERNAME: ${{ secrets.ALIYUN_DOCKER_USERNAME }}
+        ALIYUN_DOCKER_PASSWORD: ${{ secrets.ALIYUN_DOCKER_PASSWORD }}
+      run: bash build-image.sh
