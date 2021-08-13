@@ -39,7 +39,7 @@ RUN true \
   # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
   && yarn config set registry https://registry.npm.taobao.org || true \
   # just for fun
-  && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
+  # && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
 
 RUN mkdir /workspace
 
