@@ -17,7 +17,7 @@ BUILD_VERSION=latest
 #### Build the Docker Images
 
 if [ -n "${NODE_VERSION}" ]; then
-    BUILD_VERSION=${PHP_VERSION}
+    BUILD_VERSION=${NODE_VERSION}
 fi
 
 echo  build version is ${BUILD_VERSION}
