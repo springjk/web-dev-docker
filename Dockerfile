@@ -13,7 +13,7 @@ RUN true \
 RUN apt-get update \
   && apt-get install -y \
   # node-sass 等编译依赖
-  apt-utils make gcc g++ python \
+  make gcc g++ python \
   # 命令行工具
   zsh curl wget vim git
 
@@ -41,6 +41,7 @@ RUN true \
   # just for fun
   && touch ~/.oh-my-zsh/custom/custom.zsh && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh \
 
+RUN apt-get clean autoclean
 
 RUN mkdir /workspace
 
