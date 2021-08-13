@@ -1,3 +1,5 @@
+ARG NODE_VERSION
+
 FROM node:${NODE_VERSION}-slim
 
 # system local config

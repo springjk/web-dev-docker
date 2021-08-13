@@ -23,7 +23,7 @@ fi
 echo  build version is ${BUILD_VERSION}
 
 
-docker build -t webdev .
+docker build  --env NODE_VERSION=${BUILD_VERSION}  -t webdev .
 #####################################
 
 # push to docker hub
