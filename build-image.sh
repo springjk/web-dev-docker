@@ -12,18 +12,13 @@ docker --version
 echo '##### Print environment'
 env | sort
 
-BUILD_VERSION=latest
 
 #### Build the Docker Images
 
-if [ -n "${NODE_VERSION}" ]; then
-    BUILD_VERSION=${NODE_VERSION}
-fi
-
-echo  build version is ${BUILD_VERSION}
+echo  build version is ${NODE_VERSION}
 
 
-docker build  --build-arg NODE_VERSION=${BUILD_VERSION}  -t webdev .
+docker build  --build-arg NODE_VERSION=${NODE_VERSION}  -t webdev .
 #####################################
 
 # push to docker hub
@@ -35,10 +30,10 @@ docker images
 
 docker push ${DOCKER_USERNAME}/webdev
 
-if [[ ${BUILD_VERSION} != "latest" && ${BUILD_VERSION} != "NA" ]]; then
+if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
     # push build version
-    docker tag ${DOCKER_USERNAME}/webdev:latest ${DOCKER_USERNAME}/webdev:${BUILD_VERSION}
-    docker push ${DOCKER_USERNAME}/webdev:${BUILD_VERSION}
+    docker tag ${DOCKER_USERNAME}/webdev:latest ${DOCKER_USERNAME}/webdev:${NODE_VERSION}
+    docker push ${DOCKER_USERNAME}/webdev:${NODE_VERSION}
 fi
 
 
@@ -51,8 +46,8 @@ docker images
 
 docker push registry.cn-hangzhou.aliyuncs.com/${DOCKER_USERNAME}/webdev
 
-if [[ ${BUILD_VERSION} != "latest" && ${BUILD_VERSION} != "NA" ]]; then
+if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
     # push build version
-    docker tag ${DOCKER_USERNAME}/webdev:latest registry.cn-hangzhou.aliyuncs.com/${DOCKER_USERNAME}/webdev:${BUILD_VERSION}
-    docker push registry.cn-hangzhou.aliyuncs.com/${DOCKER_USERNAME}/webdev:${BUILD_VERSION}
+    docker tag ${DOCKER_USERNAME}/webdev:latest registry.cn-hangzhou.aliyuncs.com/${DOCKER_USERNAME}/webdev:${NODE_VERSION}
+    docker push registry.cn-hangzhou.aliyuncs.com/${DOCKER_USERNAME}/webdev:${NODE_VERSION}
 fi
