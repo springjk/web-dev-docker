@@ -1,20 +1,28 @@
 # 前端开发环境 Docker 镜像
-基于 Alpine 版 linux，构建于 `Nodejs` LTS，包含  `yarn` `webpack` `zsh` `git` 等常用工具，开箱即用。
+基于 Debain 版 linux，构建于 `Nodejs` 各大版本，包含  `node-sass` `yarn` `webpack` `zsh` `git` 等常用工具，开箱即用。
 
 
 如果不需要作为开发环境而是将其作为命令行工具使用，参考以下用法：
 
+
+ 如需指定 node 版本则在 image 后增加 tag ，NODE 版本列表 [10 - 16](https://hub.docker.com/r/springjk/webdev/tags?page=1&ordering=last_updated)，`例：springjk/webdev:10`
+
 **PS：工具式用法**
+
 
 ```bash
 cd {your-project-path}
-docker run --rm -v $(pwd):/workspace  springjk/webdev {your-command}
+docker run --rm -v $(pwd):/workspace  springjk/webdev:{node-version} sh -c {your-command}
 ```
 
 示例：
 
 ```bash
-docker run --rm -v $(pwd):/workspace  springjk/webdev npm install && npm run build
+docker run --rm -v $(pwd):/workspace  springjk/webdev sh -c 'npm install';
+
+docker run --rm -v $(pwd):/workspace  springjk/webdev sh -c 'node -v && yarn install && yarn run build';
+# 指定 node 版本 [10-16]
+docker run --rm -v $(pwd):/workspace  springjk/webdev:14 sh -c 'node -v && yarn install && yarn run build';
 ```
 
 ## 安装
@@ -28,9 +36,11 @@ docker run --rm -v $(pwd):/workspace  springjk/webdev npm install && npm run bui
 
 ```bash
 docker pull springjk/webdev
+# 或指定版本
+docker pull springjk/webdev:16
 ```
 
-**Setp2: 创建容器**
+**Setp2: 创建常驻式容器**
 
 ```bash
 docker run -itd -p <work-port>:8080 -v <workspace-path>:/workspace --name webdev --restart always springjk/webdev
@@ -67,8 +77,8 @@ docker rm -f webdev
 
 | 名称 | 说明 | 版本 |
 | --- | --- | --- |
-| [node](http://www.npmjs.com) | Node.js 基础环境 | 12 (LTS) |
-| [python](https://www.python.org) | Python 基础环境，编译 node-sass 必要环境 | V2.X |
+| [node](http://www.npmjs.com) | Node.js 基础环境 | 10-16 |
+| [python](https://www.python.org) | Python 基础环境，编译 node-sass 必要环境 | latest |
 
 ### 模块管理器
 
@@ -76,14 +86,6 @@ docker rm -f webdev
 | --- | --- | --- |
 | [npm](http://www.npmjs.com) | Node.js 官方推出的 JavaScript 包工具 | v3.10.8 |
 | [yarn](https://yarnpkg.com) | Facebook 推出的开源 JavaScript 包工具 | latest |
-
-
-### 构建工具
-
-| 名称 | 说明 | 版本 |
-| --- | --- | --- |
-| [gulp](http://gulpjs.com) | 自动化构建工具 | latest |
-| [grunt](http://gruntjs.com) | 自动化构建工具 | latest |
 
 
 ### 编译工具
@@ -113,5 +115,5 @@ docker rm -f webdev
 ### 本地化
 
 * 时区修改为 `PRC`
-* npm 源修改为淘宝源
+* npm 及相关二进制包源修改为淘宝源
 * APK 包管理器源修改为中科大源
