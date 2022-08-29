@@ -25,19 +25,19 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 
 RUN true \
   # npm china mirrors
-  && npm config set registry https://registry.npm.taobao.org \
-  && npm config set disturl https://npm.taobao.org/dist \
-  && npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass \
-  && npm config set electron_mirror https://npm.taobao.org/mirrors/electron \
-  && npm config set puppeteer_download_host https://npm.taobao.org/mirrors \
-  && npm config set chromedriver_cdnurl https://npm.taobao.org/mirrors/chromedriver \
-  && npm config set operadriver_cdnurl https://npm.taobao.org/mirrors/operadriver \
-  && npm config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs \
-  && npm config set selenium_cdnurl https://npm.taobao.org/mirrors/selenium \
+  && npm config set registry https://registry.npmmirror.com \
+  && npm config set disturl https://npmmirror.com/dist \
+  && npm config set sass_binary_site https://npmmirror.com/mirrors/node-sass \
+  && npm config set electron_mirror https://npmmirror.com/mirrors/electron \
+  && npm config set puppeteer_download_host https://npmmirror.com/mirrors \
+  && npm config set chromedriver_cdnurl https://npmmirror.com/mirrors/chromedriver \
+  && npm config set operadriver_cdnurl https://npmmirror.com/mirrors/operadriver \
+  && npm config set phantomjs_cdnurl https://npmmirror.com/mirrors/phantomjs \
+  && npm config set selenium_cdnurl https://npmmirror.com/mirrors/selenium \
   # fix yarn permission denied  https://github.com/nodejs/docker-node/issues/661
   && chmod a+x /usr/local/bin/yarn \
   # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
-  && yarn config set registry https://registry.npm.taobao.org || true \
+  && yarn config set registry https://registry.npmmirror.com || true \
   # just for fun
   && touch ~/.oh-my-zsh/custom/custom.zsh && echo 'ZSH_THEME="random"' > ~/.oh-my-zsh/custom/custom.zsh
 
