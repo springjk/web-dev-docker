@@ -17,9 +17,6 @@ RUN apt-get update \
   # 命令行工具
   zsh curl wget vim git
 
-RUN npm install -g \
-  anywhere
-
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 
