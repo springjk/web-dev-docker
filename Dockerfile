@@ -31,6 +31,8 @@ RUN true \
   && npm config set operadriver_cdnurl https://npmmirror.com/mirrors/operadriver \
   && npm config set phantomjs_cdnurl https://npmmirror.com/mirrors/phantomjs \
   && npm config set selenium_cdnurl https://npmmirror.com/mirrors/selenium \
+  # install pnpm
+  && npm install -g pnpm \
   # fix yarn permission denied  https://github.com/nodejs/docker-node/issues/661
   && chmod a+x /usr/local/bin/yarn \
   # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
