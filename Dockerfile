@@ -8,8 +8,6 @@ RUN true \
 
 RUN apt-get update \
   && apt-get install -y \
-  # node-sass 等编译依赖
-  make gcc g++ python \
   # 命令行工具
   zsh curl wget vim git
 
