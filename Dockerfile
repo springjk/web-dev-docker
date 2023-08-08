@@ -5,8 +5,8 @@ FROM node:${NODE_VERSION}-slim
 # system local config
 RUN true \
   # debian china mirrors
-  && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
-  && sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
+  && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
+  && sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
   # timezone to china
   && ln -sf /usr/share/zoneinfo/PRC /etc/localtime
 
