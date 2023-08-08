@@ -77,29 +77,16 @@ docker rm -f webdev
 
 | 名称 | 说明 | 版本 |
 | --- | --- | --- |
-| [node](http://www.npmjs.com) | Node.js 基础环境 | 10-16 |
-| [python](https://www.python.org) | Python 基础环境，编译 node-sass 必要环境 | latest |
+| [node](http://www.npmjs.com) | Node.js 基础环境 | 10-18 |
 
 ### 模块管理器
 
 | 名称 | 说明 | 版本 |
 | --- | --- | --- |
-| [npm](http://www.npmjs.com) | Node.js 官方推出的 JavaScript 包工具 | v3.10.8 |
+| [npm](http://www.npmjs.com) | Node.js 官方推出的 JavaScript 包工具 | latest |
 | [yarn](https://yarnpkg.com) | Facebook 推出的开源 JavaScript 包工具 | latest |
+| [pnpm](https://pnpm.io/) | 新一代的开源 JavaScript 包工具 | latest |
 
-
-### 编译工具
-
-| 名称 | 说明 | 版本 |
-| --- | --- | --- |
-| [node-sass](https://www.npmjs.com/package/node-sas) | CSS 预处理语言编译工具 | latest |
-
-
-### 开发工具
-
-| 名称 | 说明 | 版本 |
-| --- | --- | --- |
-| [anywhere](https://www.npmjs.com/package/anywhere) | 随启随用的静态文件服务器 | latest |
 
 ### 系统工具
 
@@ -115,5 +102,5 @@ docker rm -f webdev
 ### 本地化
 
 * 时区修改为 `PRC`
-* npm 及相关二进制包源修改为淘宝源
-* APK 包管理器源修改为中科大源
+* npm 及相关二进制包源修改为阿里源
+* 添加 YARN、PNPM
