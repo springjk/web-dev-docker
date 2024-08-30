@@ -16,14 +16,14 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 
 RUN true \
   # npm china mirrors
-  && npm config set registry https://registry.npmmirror.com \
+  && npm config set registry https://registry.npmmirror.com || true \
   # fix yarn permission denied  https://github.com/nodejs/docker-node/issues/661
   && chmod a+x /usr/local/bin/yarn \
   # yarn china mirrors  https://github.com/nodejs/docker-node/issues/386
   && yarn config set registry https://registry.npmmirror.com || true \
   # install pnpm
   && npm install -g pnpm \
-  && pnpm config set registry https://registry.npmmirror.com
+  && pnpm config set registry https://registry.npmmirror.com || true
 
 RUN apt-get clean autoclean
 
