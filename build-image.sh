@@ -16,8 +16,8 @@ env | sort
 # 2. 定义关键变量（新增：指定需要支持的架构列表，如 ARM64 + x86_64）
 TARGET_ARCHITECTURES="linux/arm64,linux/amd64"  # 多架构列表（arm64对应ARM，amd64对应x86_64）
 DOCKER_HUB_REPO="${DOCKER_USERNAME}/webdev"     # Docker Hub 仓库地址
-ALIYUN_REPO="registry.cn-hangzhou.aliyuncs.com/${DOCKER_USERNAME}/webdev"  # 阿里云仓库地址
-PRIVATE_REPO="${PRIVATE_REPOSITORY}/mirror/${DOCKER_USERNAME}/webdev"  # 私有仓库地址
+ALIYUN_REPO="registry.cn-hangzhou.aliyuncs.com/springjk/webdev"  # 阿里云仓库地址
+PRIVATE_REPO="${PRIVATE_REPOSITORY}/mirror/springjk/webdev"  # 私有仓库地址
 NODE_VERSION=${NODE_VERSION:-"latest"}          # 默认Node版本为latest
 
 echo "##### Build version: ${NODE_VERSION}, Target architectures: ${TARGET_ARCHITECTURES}"
