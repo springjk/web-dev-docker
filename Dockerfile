@@ -23,18 +23,14 @@ RUN apt-get update && \
 # 注：|| true 避免脚本中非致命错误导致构建失败（如提示 Shell 切换）
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
-# 4. 配置三大包管理工具 + 国内源（核心需求，确保依赖拉取加速）
-RUN true \
-    # npm 配置 npmmirror 国内源
-    && npm config set registry https://registry.npmmirror.com \
-    # 启用 corepack 并安装最新版 yarn
-    && corepack enable \
-    && corepack prepare yarn@stable --activate \
-    # yarn 配置 npmmirror 国内源（yarn 4+ 新语法）
-    && yarn config set npmRegistryServer "https://registry.npmmirror.com" \
-    # pnpm 配置 npmmirror 国内源 + 优化存储
-    && pnpm config set registry https://registry.npmmirror.com \
-    && pnpm config set store-dir ~/.pnpm-store
+# 4. 配置包管理工具源
+RUN npm config set registry https://registry.npmmirror.com && \
+    # 启用 corepack
+    corepack enable && \
+    # 配置包管理工具源
+    yarn config set registry https://registry.npmmirror.com && \
+    pnpm config set registry https://registry.npmmirror.com && \
+    pnpm config set store-dir ~/.pnpm-store
 
 # 5. 基础环境配置（工作目录+数据卷，方便开发时挂载本地代码）
 RUN mkdir -p /workspace
