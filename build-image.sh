@@ -31,10 +31,10 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 # 4. 多架构构建并推送至 Docker Hub（核心修改：用 buildx build --platform 指定多架构，--push 直接推送）
 # 推送 latest 标签（无论 Node 版本是否为 latest，都推送 latest 作为默认标签）
 docker buildx build \
-  --platform "${TARGET_ARCHITECTURES}" \  # 指定多架构
-  --build-arg NODE_VERSION="${NODE_VERSION}" \  # 传递 Node 版本参数
-  -t "${DOCKER_HUB_REPO}:latest" \  # Docker Hub latest 标签
-  --push .  # 直接推送（无需本地 tag，Buildx 会自动处理多架构镜像索引）
+  --platform "${TARGET_ARCHITECTURES}" \
+  --build-arg NODE_VERSION="${NODE_VERSION}" \
+  -t "${DOCKER_HUB_REPO}:latest" \
+  --push .
 
 # 若 Node 版本不是 latest/NA，额外推送版本标签（如 webdev:20）
 if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
