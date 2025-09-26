@@ -7,9 +7,10 @@ FROM node:${NODE_VERSION}-slim
 # 1. 配置时区（避免时间相关问题，无额外依赖）
 RUN ln -sf /usr/share/zoneinfo/PRC /etc/localtime
 
-# 2. 安装核心工具集（curl/wget/vim/git/zsh）+ 清理缓存（修复注释位置：注释需在续接符 \ 之前）
+# 2. 安装核心工具集和 CA 证书
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        ca-certificates \
         curl \ 
         wget \ 
         vim \
