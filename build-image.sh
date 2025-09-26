@@ -17,6 +17,7 @@ env | sort
 TARGET_ARCHITECTURES="linux/arm64,linux/amd64"  # 多架构列表（arm64对应ARM，amd64对应x86_64）
 DOCKER_HUB_REPO="${DOCKER_USERNAME}/webdev"     # Docker Hub 仓库地址
 ALIYUN_REPO="registry.cn-hangzhou.aliyuncs.com/${DOCKER_USERNAME}/webdev"  # 阿里云仓库地址
+PRIVATE_REPO="${PRIVATE_REPOSITORY}/mirror/${DOCKER_USERNAME}/webdev"  # 私有仓库地址
 NODE_VERSION=${NODE_VERSION:-"latest"}          # 默认Node版本为latest
 
 echo "##### Build version: ${NODE_VERSION}, Target architectures: ${TARGET_ARCHITECTURES}"
@@ -60,9 +61,27 @@ if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
       --push .
 fi
 
-# 6. 验证推送结果（可选：查看仓库中的多架构镜像信息）
+# 6. 构建并推送至私有仓库
+docker buildx build \
+  --platform "${TARGET_ARCHITECTURES}" \
+  --build-arg NODE_VERSION="${NODE_VERSION}" \
+  -t "${PRIVATE_REPO}:latest" \
+  --push .
+
+if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
+    docker buildx build \
+      --platform "${TARGET_ARCHITECTURES}" \
+      --build-arg NODE_VERSION="${NODE_VERSION}" \
+      -t "${PRIVATE_REPO}:${NODE_VERSION}" \
+      --push .
+fi
+
+# 7. 验证推送结果（可选：查看仓库中的多架构镜像信息）
 echo "##### Check Docker Hub multi-arch image info"
 docker buildx imagetools inspect "${DOCKER_HUB_REPO}:latest"
 
 echo "##### Check Aliyun multi-arch image info"
 docker buildx imagetools inspect "${ALIYUN_REPO}:latest"
+
+echo "##### Check Private Registry multi-arch image info"
+docker buildx imagetools inspect "${PRIVATE_REPO}:latest"
