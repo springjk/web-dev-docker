@@ -29,52 +29,20 @@ docker buildx create --name multiarch-builder --use || true
 # 加载 qemu 模拟器（用于跨架构构建，如在x86机器上构建ARM镜像）
 docker run --privileged --rm tonistiigi/binfmt --install all
 
-# 4. 多架构构建并推送至 Docker Hub（核心修改：用 buildx build --platform 指定多架构，--push 直接推送）
-# 推送 latest 标签（无论 Node 版本是否为 latest，都推送 latest 作为默认标签）
+# 4. 多架构构建并推送至所有仓库（合并构建以提高效率）
+# 准备标签列表
+TAGS="-t ${DOCKER_HUB_REPO}:latest -t ${ALIYUN_REPO}:latest -t ${PRIVATE_REPO}:latest"
+if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
+    TAGS="${TAGS} -t ${DOCKER_HUB_REPO}:${NODE_VERSION} -t ${ALIYUN_REPO}:${NODE_VERSION} -t ${PRIVATE_REPO}:${NODE_VERSION}"
+fi
+
+# 执行一次构建，推送到所有仓库
+echo "##### Building and pushing to all registries"
 docker buildx build \
   --platform "${TARGET_ARCHITECTURES}" \
   --build-arg NODE_VERSION="${NODE_VERSION}" \
-  -t "${DOCKER_HUB_REPO}:latest" \
+  ${TAGS} \
   --push .
-
-# 若 Node 版本不是 latest/NA，额外推送版本标签（如 webdev:20）
-if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
-    docker buildx build \
-      --platform "${TARGET_ARCHITECTURES}" \
-      --build-arg NODE_VERSION="${NODE_VERSION}" \
-      -t "${DOCKER_HUB_REPO}:${NODE_VERSION}" \
-      --push .
-fi
-
-# 5. 多架构构建并推送至阿里云镜像仓库（逻辑与 Docker Hub 一致）
-docker buildx build \
-  --platform "${TARGET_ARCHITECTURES}" \
-  --build-arg NODE_VERSION="${NODE_VERSION}" \
-  -t "${ALIYUN_REPO}:latest" \
-  --push .
-
-if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
-    docker buildx build \
-      --platform "${TARGET_ARCHITECTURES}" \
-      --build-arg NODE_VERSION="${NODE_VERSION}" \
-      -t "${ALIYUN_REPO}:${NODE_VERSION}" \
-      --push .
-fi
-
-# 6. 构建并推送至私有仓库
-docker buildx build \
-  --platform "${TARGET_ARCHITECTURES}" \
-  --build-arg NODE_VERSION="${NODE_VERSION}" \
-  -t "${PRIVATE_REPO}:latest" \
-  --push .
-
-if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
-    docker buildx build \
-      --platform "${TARGET_ARCHITECTURES}" \
-      --build-arg NODE_VERSION="${NODE_VERSION}" \
-      -t "${PRIVATE_REPO}:${NODE_VERSION}" \
-      --push .
-fi
 
 # 7. 验证推送结果（可选：查看仓库中的多架构镜像信息）
 echo "##### Check Docker Hub multi-arch image info"

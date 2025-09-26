@@ -27,7 +27,7 @@ RUN true \
     # npm 配置 npmmirror 国内源
     && npm config set registry https://registry.npmmirror.com || true \
     # 修复 yarn 权限问题（官方预安装 yarn 可能存在执行权限不足，ARM 环境同样适用）
-    && chmod a+x /usr/local/bin/yarn /usr/local/lib/node_modules/yarn/bin/yarn.js || true \
+    && chmod a+x /usr/local/bin/yarn || true \
     # yarn 配置 npmmirror 国内源
     && yarn config set registry https://registry.npmmirror.com || true \
     # 全局安装 pnpm（Node 官方镜像默认不含，通过 npm 内置命令安装，ARM 兼容）
