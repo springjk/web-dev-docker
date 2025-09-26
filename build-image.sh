@@ -42,7 +42,7 @@ if [[ ${NODE_VERSION} != "latest" && ${NODE_VERSION} != "NA" ]]; then
     docker buildx build \
       --platform "${TARGET_ARCHITECTURES}" \
       --build-arg NODE_VERSION="${NODE_VERSION}" \
-      -t "${DOCKER_HUB_REPO}:${NODE_VERSION}" \  # 版本标签
+      -t "${DOCKER_HUB_REPO}:${NODE_VERSION}" \
       --push .
 fi
 
