@@ -23,20 +23,18 @@ RUN apt-get update && \
 # 注：|| true 避免脚本中非致命错误导致构建失败（如提示 Shell 切换）
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
-# 4. 配置三大包管理工具 + 国内源（核心需求，确保 ARM 环境依赖拉取加速）
+# 4. 配置三大包管理工具 + 国内源（核心需求，确保依赖拉取加速）
 RUN true \
     # npm 配置 npmmirror 国内源
-    && npm config set registry https://registry.npmmirror.com || true \
+    && npm config set registry https://registry.npmmirror.com \
     # 启用 corepack 并安装最新版 yarn
     && corepack enable \
     && corepack prepare yarn@stable --activate \
-    # yarn 配置 npmmirror 国内源
-    && yarn config set registry https://registry.npmmirror.com || true \
-    # 全局安装 pnpm（Node 官方镜像默认不含，通过 npm 内置命令安装，ARM 兼容）
-    && npm install -g pnpm || true \
-    # pnpm 配置 npmmirror 国内源 + 优化存储（可选：减少重复依赖占用空间）
-    && pnpm config set registry https://registry.npmmirror.com || true \
-    && pnpm config set store-dir ~/.pnpm-store || true
+    # yarn 配置 npmmirror 国内源（yarn 4+ 新语法）
+    && yarn config set npmRegistryServer "https://registry.npmmirror.com" \
+    # pnpm 配置 npmmirror 国内源 + 优化存储
+    && pnpm config set registry https://registry.npmmirror.com \
+    && pnpm config set store-dir ~/.pnpm-store
 
 # 5. 基础环境配置（工作目录+数据卷，方便开发时挂载本地代码）
 RUN mkdir -p /workspace
