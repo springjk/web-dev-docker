@@ -104,3 +104,7 @@ docker rm -f webdev
 * 时区修改为 `PRC`
 * npm 及相关二进制包源修改为阿里源
 * 添加 YARN、PNPM
+
+## Docker Hub
+
+[![Docker Pulls](https://img.shields.io/docker/pulls/springjk/webdev)](https://hub.docker.com/r/springjk/webdev)
